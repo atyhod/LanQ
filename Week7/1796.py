@@ -5,7 +5,7 @@ dp[0][1] = 0
 
 for i in range(1, N+1):
     k = int(input())
-    for _ in range(k):
+    for l in range(1, k + 1):
         arr = list(map(int, input().split()))
         j = 0
         while arr[j] != 0:
@@ -18,5 +18,6 @@ for i in range(1, N+1):
                 cost = new_cost
 
             j += 2
-
+        
+        dp[i][l] = cost
 print(min(dp[3]))
