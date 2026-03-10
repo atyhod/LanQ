@@ -1,23 +1,17 @@
+INF = 10000
 N = int(input())
-dp = [dict() for _ in range(N + 1)]
 
-dp[0][1] = 0
-
+prev = [0]
 for i in range(1, N+1):
-    k = int(input())
-    for l in range(1, k + 1):
+    n = int(input())
+    curr = [INF] * n
+    for j in range(n):
         arr = list(map(int, input().split()))
-        j = 0
-        while arr[j] != 0:
+        k = 0
+        while arr[k] != 0:
+            curr[j] = min(curr[j], prev[arr[k]-1] + arr[k+1])
+            k += 2
 
-            prev_planet = arr[j]
-            cost = arr[j + 1]
+    prev = curr
 
-            new_cost = dp[i - 1][prev_planet] + cost
-            if new_cost < cost:
-                cost = new_cost
-
-            j += 2
-        
-        dp[i][l] = cost
-print(min(dp[3]))
+print(min(curr))
