@@ -1,31 +1,51 @@
-# # B
-# arr = []
-# num = 2019
-# reflect = ["A", "B", "C", "D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+# B
+arr = []
+num = 2019
+reflect = ["A", "B", "C", "D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
-# while num > 26:
-#     a = num % 26
-#     arr.append(reflect[a-1])
-#     num = num // 26
+while num > 26:
+    a = num % 26
+    arr.append(reflect[a-1])
+    num = num // 26
 
-# arr.append(reflect[num-1])
-# arr.reverse()
+arr.append(reflect[num-1])
+arr.reverse()
 
-# for char in arr:
-#     print(char, end="") # BYQ
+for char in arr:
+    print(char, end="") # BYQ
 
-# # C
-# a = 1
-# b = 1
-# c = 1
-# for _ in range(20190321):
-#     d = (a+b+c)%10000
-#     a = b
-#     b = c
-#     c = d
-# print(d) #4659
+# C
+a = 1
+b = 1
+c = 1
+for _ in range(20190321):
+    d = (a+b+c)%10000
+    a = b
+    b = c
+    c = d
+print(d) #4659
 
 # D
+def valid(n):
+    return '2' not in str(n) and '4' not in str(n)
+
+nums = [i for i in range(1, 2019) if valid(i)]
+num_set = set(nums)
+
+count = 0
+n = len(nums)
+
+for i in range(n):
+    a = nums[i]
+    for j in range(i + 1, n):
+        b = nums[j]
+        c = 2019 - a - b
+        if c > b and c in num_set:
+            count += 1
+
+print(count) # 40785
+
+
 
 # E
 maze = [
