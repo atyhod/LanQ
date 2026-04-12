@@ -1,29 +1,27 @@
 n = int(input())
-
-w = [0] * (n + 1)
-g = [[] for _ in  range(n+1)]
+weight = [0]
+t = [[] for _ in range(n+1)]
 
 for i in range(1, n+1):
-    w[i], u, v = map(int, input().split())
-    
+    w, u, v = map(int, input().split())
+    weight.append(w)
     if u != 0:
-        g[i].append(u)
-        g[u].append(i)
-
+        t[i].append(u)
+        t[u].append(i)
     if v != 0:
-        g[i].append(v)
-        g[v].append(i)
+        t[i].append(v)
+        t[v].append(i)
 
-def dfs(curr, parent, dist):
-    total = w[curr] * dist
-    for i in g[curr]:
-        if i != parent:
-            total += dfs(i, curr, dist + 1)
-    return total
+def dfs(u, parent, dist):
+    res = dist * weight[u]
+    for v in t[u]:
+        if v != parent:
+            res += dfs(v, u, dist+1)
+    return res
 
-min = dfs(1, 1, 0)
-for i in range(2, n+1):
-    total = dfs(i, i, 0)
-    if total < min:
-        min = total
+min = dfs(1, 0, 0)
+for i in range(1, n+1):
+    curr = dfs(i, 0, 0)
+    if min > curr:
+        min = curr
 print(min)
